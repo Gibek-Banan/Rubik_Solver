@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommandArguments>"U R' B' F' R' D2 B2 D2 U B2 F D U2 F2 D' L2 U2 F' L2 F U B2 D R2 D2 U2 R2 L2 D R2 D' L' B2 D2 F2 L2 D F2 R2 U' F2 D2 F' D' B L' D F U' B U' F2 L' B' L2 D' R L B F U' L' B D B R2 D B' U' L F' R2 L2 D' F2 D U' L' B R2 F R U' F D U2 L B2 U2 F' L F' U' F' L2 U F R2 U2 B'"</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+</Project>
