@@ -1,6 +1,10 @@
 ﻿#include "Cube.hpp"
 #include "Solver.hpp"
 #include "Rubik.hpp"
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <sstream>
 
 Cube cube;
 
@@ -44,7 +48,6 @@ void shuffle(int ac, char** av)
 					num = 2;
 				cube.rotCube(av[1][i], num);
 			}
-	cube.getColor();
 	cout << GREEN << "\nCube shuffle complete!\n";
 	
 }
@@ -80,25 +83,35 @@ void hashSolve(Cube* solverCube, Solver* s, string* output)
 			}
 		}
 		if (*solverCube == c)
+		{
+			solverCube->show();
 			return;
+		}
 		s->nextPhase();
 	}
 }
 
-int main(int ac, char** av) {
-	
-	shuffle(ac, av);
-	
-	cube.getColor();
-	for (int i = 0; i < 6; i++)
-	{
+int main(int ac, char** av)
+{
+	cube.show();
+	/*stringstream ss;
+	for (int i = 0;i<6;i++)
 		for (int j = 0; j < 9; j++)
 		{
-			cout << cube.color[9 * i + j] << ", ";
-		}
-		cout << "\n";
-	}
+			ss << j;
+			cube[i * 9 + j] = const_cast<char*>(ss.str().c_str())[j];
+			cube.show();
+		}*/
 
+	//cube.rotCube('U',1);
+	//cube.show();
+
+	cube.readFromFile("colors.txt");
+	cube.convertColorsToNotation();
+	cube.show();
+	/*
+	shuffle(ac, av);
+	cube.show();
 	string output;
 	Cube solverCube;
 	solverCube = cube;
@@ -107,5 +120,6 @@ int main(int ac, char** av) {
 	cout << "Final output:" << endl;
 	cout << translate(output) << endl;
 	cout << "Total steps: " << output.size() / 2 << endl;
+	*/
 	return 0;
 }

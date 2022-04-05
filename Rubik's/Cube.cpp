@@ -5,6 +5,9 @@ Cube::Cube(){
 	for (char c = 0; c < 6; c++)
 		for (int i = 0; i < 9; i++)
 			color[c * 9 + i] = colorTabEncode[c];
+	colorToWalls();
+
+	
 }
 
 Cube& Cube::operator=(const Cube& a){
@@ -54,6 +57,7 @@ void	Cube::rotCube(char c, int amount){
 		case 'D':
 			rotDown(amount);
 	}
+	getColor();
 }
 
 void	Cube::rotUp(int amount){
@@ -315,4 +319,149 @@ void	Cube::getColor()
 	color[pos++] = cornerFace(ulb, 1);
 	color[pos++] = edgeFace(ul, 1);
 	color[pos++] = cornerFace(ufl, 2);
+}
+
+void Cube::wallsToColor()
+{
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			color[i * 9 + j] = walls[i][j];
+		}
+	}
+}
+void Cube::colorToWalls()
+{
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			walls[i][j] = color[9 * i + j];
+		}
+	}
+}
+
+void Cube::show()
+{
+	colorToWalls();
+	std::cout << "    " << walls[U].substr(0, 3) << std::endl;
+	std::cout << "    " << walls[U].substr(3, 3) << std::endl;
+	std::cout << "    " << walls[U].substr(6, 3) << std::endl;
+	std::cout << walls[L].substr(0, 3) << " " << walls[F].substr(0, 3) << " " << walls[R].substr(0, 3) << " " << walls[B].substr(0, 3) << std::endl;
+	std::cout << walls[L].substr(3, 3) << " " << walls[F].substr(3, 3) << " " << walls[R].substr(3, 3) << " " << walls[B].substr(3, 3) << std::endl;
+	std::cout << walls[L].substr(6, 3) << " " << walls[F].substr(6, 3) << " " << walls[R].substr(6, 3) << " " << walls[B].substr(6, 3) << std::endl;
+	std::cout << "    " << walls[D].substr(0, 3) << std::endl;
+	std::cout << "    " << walls[D].substr(3, 3) << std::endl;
+	std::cout << "    " << walls[D].substr(6, 3) << std::endl
+		<< std::endl;
+}
+
+void Cube::readFromFile(const std::string& path)
+{
+	std::string line;
+	ifstream file(path);
+	if (file.is_open())
+	{
+		int i = 0;
+		while (std::getline(file, line))
+		{
+			std::istringstream linestream(line);
+			if (i >= 0 && i <= 2)
+			{
+				while (linestream >> walls[U][i * 3] >> walls[U][i * 3 + 1] >> walls[U][i * 3 + 2]) {}
+			}
+			if (i >= 3 && i <= 5)
+			{
+				while (linestream >> walls[L][(i - 3) * 3] >> walls[L][(i - 3) * 3 + 1] >> walls[L][(i - 3) * 3 + 2]
+					>> walls[F][(i - 3) * 3] >> walls[F][(i - 3) * 3 + 1] >> walls[F][(i - 3) * 3 + 2]
+					>> walls[R][(i - 3) * 3] >> walls[R][(i - 3) * 3 + 1] >> walls[R][(i - 3) * 3 + 2]
+					>> walls[B][(i - 3) * 3] >> walls[B][(i - 3) * 3 + 1] >> walls[B][(i - 3) * 3 + 2]) {
+				}
+			}
+			if (i >= 6 && i <= 8)
+			{
+				while (linestream >> walls[D][(i - 6) * 3] >> walls[D][(i - 6) * 3 + 1] >> walls[D][(i - 6) * 3 + 2]) {}
+			}
+			i++;
+		}
+	}
+	//FIXING
+	rotateR(walls[F]);
+	rotateR(walls[B]);
+	rotateR(walls[R]);
+	rotateR(walls[R]);
+	rotateR(walls[L]);
+	rotateR(walls[L]);
+	//FIXING
+	wallsToColor();
+	file.close();
+}
+
+void Cube::convertColorsToNotation()
+{
+	char cF;
+	char cB;
+	char cR;
+	char cL;
+	char cU;
+	char cD;
+
+	cF = walls[F][4];
+	cB = walls[B][4];
+	cR = walls[R][4];
+	cL = walls[L][4];
+	cU = walls[U][4];
+	cD = walls[D][4];
+
+	for (int i = 0; i < 6; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (walls[i][j] == cF) walls[i][j] = 'F';
+			else if (walls[i][j] == cB) walls[i][j] = 'B';
+			else if (walls[i][j] == cR) walls[i][j] = 'R';
+			else if (walls[i][j] == cL) walls[i][j] = 'L';
+			else if (walls[i][j] == cU) walls[i][j] = 'U';
+			else if (walls[i][j] == cD) walls[i][j] = 'D';
+		}
+	}
+	wallsToColor();
+}
+
+
+void Cube::wallsToOrientation()
+{
+	
+}
+
+void Cube::rotateR(std::string& wall)
+{
+	char temp0 = wall[0];
+	char temp1 = wall[1];
+	char temp2 = wall[2];
+	wall[2] = temp0;
+	wall[1] = wall[3];
+	wall[0] = wall[6];
+	wall[3] = wall[7];
+	wall[6] = wall[8];
+	wall[7] = wall[5];
+	wall[8] = temp2;
+	wall[5] = temp1;
+}
+
+void Cube::rotateL(std::string& wall)
+{
+	char temp0 = wall[0];
+	char temp1 = wall[1];
+	char temp2 = wall[2];
+	wall[0] = temp0;
+	wall[1] = wall[5];
+	wall[2] = wall[8];
+	wall[5] = wall[7];
+	wall[8] = wall[6];
+	wall[7] = wall[3];
+	wall[6] = temp2;
+	wall[3] = temp1;
 }
