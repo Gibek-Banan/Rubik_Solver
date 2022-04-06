@@ -122,13 +122,27 @@ int main(int ac, char** av)
 	//shuffle(ac, av);
 	//cube.show();
 	string output;
+	string outputTranslated;
 	Cube solverCube;
 	solverCube = cube;
 	Solver s(solverCube);
 	hashSolve(&solverCube, &s, &output);
 	cout << "Final output:" << endl;
-	cout << translate(output) << endl;
+	outputTranslated = translate(output);
+	cout << outputTranslated << endl;
 	cout << "Total steps: " << output.size() / 2 << endl;
+
+	std::cout << "Write to file" << std::endl;
+	std::fstream file("moves.txt");
+	if (file.is_open())
+	{
+		file << outputTranslated;
+		file.close();
+	}
+	else
+	{
+		std::cout << "Can't open a file!"<<std::endl;
+	}
 	
 	return 0;
 }
