@@ -26,10 +26,10 @@ string translate(string path)
 	return ret;
 }
 
-
-void shuffle(int ac, char** av)
+void shuffle(int ac, char **av)
 {
-	if (ac == 1 || ac > 3) {
+	if (ac == 1 || ac > 3)
+	{
 		cout << ORANGE << "Usage: Rubik \"shuffle string\" [-m | -r]\n";
 		cout << "\tShuffle string: F B U D L R with variations F F' F2\n";
 		cout << "\t-m: manually solve the cube with user input\n";
@@ -49,17 +49,16 @@ void shuffle(int ac, char** av)
 				cube.rotCube(av[1][i], num);
 			}
 	cout << GREEN << "\nCube shuffle complete!\n";
-	
 }
 
-void hashSolve(Cube* solverCube, Solver* s, string* output)
+void hashSolve(Cube *solverCube, Solver *s, string *output)
 {
-	char	face;
-	int		num;
-	int		i = 0;
-	Cube 	c;
+	char face;
+	int num;
+	int i = 0;
+	Cube c;
 	for (int phase = 1; phase <= 4; phase++)
-	{		
+	{
 		cout << "Phase " << phase << " moves: " << endl;
 		while (s->getPhaseId(*solverCube, phase) != s->phaseGoal[phase])
 		{
@@ -92,7 +91,7 @@ void hashSolve(Cube* solverCube, Solver* s, string* output)
 	}
 }
 
-int main(int ac, char** av)
+int main(int ac, char **av)
 {
 	cube.show();
 	stringstream ss;
@@ -114,13 +113,13 @@ int main(int ac, char** av)
 
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
-	//cube.show();
+	// cube.show();
 	cube.getPose();
 	cube.getColor();
 	cube.show();
 
-	//shuffle(ac, av);
-	//cube.show();
+	// shuffle(ac, av);
+	// cube.show();
 	string output;
 	string outputTranslated;
 	Cube solverCube;
@@ -141,8 +140,8 @@ int main(int ac, char** av)
 	}
 	else
 	{
-		std::cout << "Can't open a file!"<<std::endl;
+		std::cout << "Can't open a file!" << std::endl;
 	}
-	
+
 	return 0;
 }
