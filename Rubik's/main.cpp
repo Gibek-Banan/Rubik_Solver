@@ -99,27 +99,32 @@ int main(int ac, char** av)
 		for (int j = 0; j < 9; j++)
 		{
 			ss << j;
-			cube[i * 9 + j] = const_cast<char*>(ss.str().c_str())[j];
+			cube.walls[i][j] = const_cast<char*>(ss.str().c_str())[j];
+			cube.wallsToColor();
 			cube.show();
 		}*/
 
-	//cube.rotCube('U',1);
-	//cube.show();
+	/*cube.rotCube('U',1);
+	cube.show();
+	cube.rotCube('D', 1);
+	cube.show();*/
 
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
 	cube.show();
-	/*
-	shuffle(ac, av);
+	cube.getPose();
+	cube.getColor();
 	cube.show();
-	string output;
+	//shuffle(ac, av);
+	//cube.show();
+	/*string output;
 	Cube solverCube;
 	solverCube = cube;
 	Solver s(solverCube);
 	hashSolve(&solverCube, &s, &output);
 	cout << "Final output:" << endl;
 	cout << translate(output) << endl;
-	cout << "Total steps: " << output.size() / 2 << endl;
-	*/
+	cout << "Total steps: " << output.size() / 2 << endl;*/
+	
 	return 0;
 }
