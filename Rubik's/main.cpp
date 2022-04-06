@@ -94,17 +94,15 @@ void hashSolve(Cube *solverCube, Solver *s, string *output)
 int main(int ac, char **av)
 {
 	cube.show();
-	stringstream ss;
-	/*for (int i = 0;i<6;i++)
+	/*stringstream ss;
+	for (int i = 0;i<6;i++)
 		for (int j = 0; j < 9; j++)
 		{
 			ss << j;
 			cube.walls[i][j] = const_cast<char*>(ss.str().c_str())[j];
 			cube.wallsToColor();
 		}
-			cube.show(false);*/
-	/*		cube.rotateL(cube.walls[0]);
-			cube.show(false);*/
+	cube.show(false);*/
 
 	/*cube.rotCube('R',1);
 	cube.show();*/
