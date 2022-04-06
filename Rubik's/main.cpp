@@ -84,6 +84,7 @@ void hashSolve(Cube* solverCube, Solver* s, string* output)
 		}
 		if (*solverCube == c)
 		{
+			solverCube->getColor();
 			solverCube->show();
 			return;
 		}
@@ -113,13 +114,13 @@ int main(int ac, char** av)
 
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
-	cube.show();
+	//cube.show();
 	cube.getPose();
 	cube.getColor();
 	cube.show();
 
 	//shuffle(ac, av);
-	cube.show();
+	//cube.show();
 	string output;
 	Cube solverCube;
 	solverCube = cube;

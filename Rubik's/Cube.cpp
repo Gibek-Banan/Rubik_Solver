@@ -329,8 +329,7 @@ void	Cube::getColor()
 void	Cube::getPose()
 {
 	colorToWalls();
-	//fixShow();
-	show(false);
+	fixShow();
 
 	std::string c[8];
 	std::string buff = "";
@@ -621,7 +620,6 @@ void Cube::rotateR(std::string& wall)
 	wall[7] = wall[5];
 	wall[8] = temp2;
 	wall[5] = temp1;
-	wallsToColor();
 }
 
 void Cube::rotateL(std::string& wall)
@@ -637,5 +635,4 @@ void Cube::rotateL(std::string& wall)
 	wall[7] = wall[3];
 	wall[6] = temp0;
 	wall[3] = temp1;
-	wallsToColor();
 }
