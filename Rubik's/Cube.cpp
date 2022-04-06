@@ -329,11 +329,16 @@ void	Cube::getColor()
 void	Cube::getPose()
 {
 	colorToWalls();
-	fixShow();
+	//fixShow();
+	show(false);
 
 	std::string c[8];
-	std::string buff="";
-	std::string temp="";
+	std::string buff = "";
+	std::string temp = "";
+	bool found = false;
+	int cNotFound = 0;
+	int eNotFound = 0;
+
 
 	//Corners
 	temp += walls[U][8];
@@ -355,97 +360,128 @@ void	Cube::getPose()
 	temp = "";
 
 	temp += walls[D][0];
-	temp += walls[F][6];
 	temp += walls[L][8];
+	temp += walls[F][6];
 	c[dlf] = temp;
 	temp = "";
 
 	temp += walls[U][2];
-	temp += walls[B][0];
-	temp+=walls[R][2];
+	temp += walls[B][2];
+	temp += walls[R][2];
 	c[ubr] = temp;
 	temp = "";
 
 	temp += walls[U][0];
-	temp +=walls[L][0];
-	temp += walls[B][2];
+	temp += walls[L][0];
+	temp += walls[B][0];
 	c[ulb] = temp;
 	temp = "";
 
-	temp += walls[D][6];
-	temp += walls[B][6]; 
-	temp+=walls[R][8];
+	//?
+	temp += walls[D][8];
+	temp += walls[R][8];
+	temp += walls[B][8];
 	c[drb] = temp;
 	temp = "";
 
-	temp += walls[D][8];
-	temp += walls[B][2];
-	temp+=walls[L][6];
+	temp += walls[D][6];
+	temp += walls[B][6];
+	temp += walls[L][6];
 	c[dbl] = temp;
 	temp = "";
 
-	for (int i = 0;i<8;i++)
+	for (int i = 0; i < 8; i++)
 	{
 		buff = c[i];
 		for (int j = 0; j < 8; j++)
 		{
-			for (int k= 0; k < 2; k++)
+			found = false;
+			for (int k = 0; k < 3; k++)
 			{
+				std::cout << buff << " VS " << cornerNames[j] << std::endl;
 				if (buff == cornerNames[j])
 				{
+					std::cout << "buff = " << buff << std::endl;
 					cPos[i] = (corner)j;
 					cOri[i] = k;
+					found = true;
 					break;
 				}
 				offset(buff);
 			}
+			std::cout << std::endl;
+			if (found)
+			{
+				std::cout << "FOUND! c" << i << " = " << buff << ", k = " << (int)cOri[i] << std::endl << std::endl;
+				break;
+			}
+		}
+		if (!found)
+		{
+			cNotFound++;
+			std::cout << "c" << i << " = " << c[i] << " not found!" << std::endl;
 		}
 	}
 	//Edges
 	std::string e[12];
+	buff = "";
 
 	//Corners
-	temp += walls[U][7];
-	temp += walls[F][1];
-	e[uf] = temp;
-	temp = "";
+	temp += walls[U][7]; temp += walls[F][1]; e[uf] = temp; temp = "";
+	temp += walls[U][5]; temp += walls[R][1]; e[ur] = temp; temp = "";
+	temp += walls[U][1]; temp += walls[B][1]; e[ub] = temp; temp = "";
 
-	temp+=walls[U][5]; temp+= walls[R][1];e[ur] = temp;temp="";
-	temp+=walls[U][1]; temp+= walls[B][1];e[ub] = temp;temp="";
-	temp+=walls[U][3]; temp+= walls[L][1];e[ul] = temp;temp="";
-	temp+=walls[D][1]; temp+= walls[F][7];e[df] = temp;temp="";
-	temp+=walls[D][5]; temp+= walls[R][7];e[dr] = temp;temp="";
-	temp+=walls[D][7]; temp+= walls[B][7];e[db] = temp;temp="";
-	temp+=walls[D][3]; temp+= walls[L][7];e[dl] = temp;temp="";
-	temp+=walls[F][5]; temp+= walls[R][3];e[fr] = temp;temp="";
-	temp+=walls[B][3]; temp+= walls[R][5];e[br] = temp;temp="";
-	temp+=walls[B][5]; temp+= walls[L][3];e[bl] = temp;temp="";
-	temp+=walls[F][3]; temp+= walls[L][5];e[fl] = temp;temp="";
+	temp += walls[U][3]; temp += walls[L][1]; e[ul] = temp; temp = "";
+	temp += walls[D][1]; temp += walls[F][7]; e[df] = temp; temp = "";
+	temp += walls[D][5]; temp += walls[R][7]; e[dr] = temp; temp = "";
+
+	temp += walls[D][7]; temp += walls[B][7]; e[db] = temp; temp = "";
+	temp += walls[D][3]; temp += walls[L][7]; e[dl] = temp; temp = "";
+	temp += walls[F][5]; temp += walls[R][3]; e[fr] = temp; temp = "";
+
+	temp += walls[B][5]; temp += walls[R][5]; e[br] = temp; temp = "";
+	temp += walls[B][3]; temp += walls[L][3]; e[bl] = temp; temp = "";
+	temp += walls[F][3]; temp += walls[L][5]; e[fl] = temp; temp = "";
 
 	for (int i = 0; i < 12; i++)
 	{
 		buff = e[i];
-		for (int j = 0; j < 12;j++)
+		for (int j = 0; j < 12; j++)
 		{
-			for (int k = 0; k < 1;k++)
+			found = false;
+			for (int k = 0; k < 2; k++)
 			{
 				if (buff == edgeNames[j])
 				{
 					ePos[i] = (edge)j;
 					eOri[i] = k;
+					found = true;
 					break;
 				}
 				offset(buff);
 			}
+			if (found)
+			{
+				std::cout << "FOUND! e" << i << " = " << buff << ", k = " << (int)eOri[i] << std::endl << std::endl;
+				break;
+			}
+		}
+		if (!found)
+		{
+			eNotFound++;
+			std::cout << "e" << i << " = " << e[i] << " not found!" << std::endl;
 		}
 	}
+	std::cout << "cNotFound = " << cNotFound<<std::endl;
+	std::cout << "eNotFound = " << eNotFound<<std::endl;
 }
+
 void Cube::offset(std::string& s)
 {
 	std::string temp = s;
 	for (int i = 0; i < s.length(); i++)
 	{
-		s[(i + 1) % 3] = temp[i];
+		s[(i + 1) % s.length()] = temp[i];
 	}
 }
 void Cube::wallsToColor()
@@ -470,10 +506,10 @@ void Cube::colorToWalls()
 	}
 }
 
-void Cube::show()
+void Cube::show(bool fix)
 {
 	colorToWalls();
-	fixShow();
+	if(fix) fixShow();
 	std::cout << "    " << walls[U].substr(0, 3) << std::endl;
 	std::cout << "    " << walls[U].substr(3, 3) << std::endl;
 	std::cout << "    " << walls[U].substr(6, 3) << std::endl;
@@ -572,11 +608,6 @@ void Cube::convertColorsToNotation()
 }
 
 
-void Cube::wallsToOrientation()
-{
-	
-}
-
 void Cube::rotateR(std::string& wall)
 {
 	char temp0 = wall[0];
@@ -590,6 +621,7 @@ void Cube::rotateR(std::string& wall)
 	wall[7] = wall[5];
 	wall[8] = temp2;
 	wall[5] = temp1;
+	wallsToColor();
 }
 
 void Cube::rotateL(std::string& wall)
@@ -605,4 +637,5 @@ void Cube::rotateL(std::string& wall)
 	wall[7] = wall[3];
 	wall[6] = temp0;
 	wall[3] = temp1;
+	wallsToColor();
 }

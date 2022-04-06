@@ -94,19 +94,21 @@ void hashSolve(Cube* solverCube, Solver* s, string* output)
 int main(int ac, char** av)
 {
 	cube.show();
-	/*stringstream ss;
-	for (int i = 0;i<6;i++)
+	stringstream ss;
+	/*for (int i = 0;i<6;i++)
 		for (int j = 0; j < 9; j++)
 		{
 			ss << j;
 			cube.walls[i][j] = const_cast<char*>(ss.str().c_str())[j];
 			cube.wallsToColor();
-			cube.show();
-		}*/
+		}
+			cube.show(false);*/
+	/*		cube.rotateL(cube.walls[0]);
+			cube.show(false);*/
 
-	/*cube.rotCube('U',1);
-	cube.show();
-	cube.rotCube('D', 1);
+	/*cube.rotCube('R',1);
+	cube.show();*/
+	/*cube.rotCube('D', 1);
 	cube.show();*/
 
 	cube.readFromFile("colors.txt");
@@ -115,16 +117,17 @@ int main(int ac, char** av)
 	cube.getPose();
 	cube.getColor();
 	cube.show();
+
 	//shuffle(ac, av);
-	//cube.show();
-	/*string output;
+	cube.show();
+	string output;
 	Cube solverCube;
 	solverCube = cube;
 	Solver s(solverCube);
 	hashSolve(&solverCube, &s, &output);
 	cout << "Final output:" << endl;
 	cout << translate(output) << endl;
-	cout << "Total steps: " << output.size() / 2 << endl;*/
+	cout << "Total steps: " << output.size() / 2 << endl;
 	
 	return 0;
 }

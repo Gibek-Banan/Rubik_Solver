@@ -54,12 +54,11 @@ public:
 	void getPose();
 	void wallsToColor();
 	void colorToWalls();
-	void show();
+	void show(bool fix = true);
 	void fixShow();
 	void fixRead();
 	void readFromFile(const std::string& path);
 	void convertColorsToNotation();
-	void wallsToOrientation();
 	void rotateR(std::string& wall);
 	void rotateL(std::string& wall);
 	void offset(std::string& s);
