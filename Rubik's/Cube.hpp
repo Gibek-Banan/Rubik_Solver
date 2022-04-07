@@ -80,7 +80,7 @@ public:
 	void wallsToColor();
 	void colorToWalls();
 	void show(bool fix = true);
-	void fixShow();
+	void fixWalls();
 	void fixRead();
 	void readFromFile(const std::string &path);
 	void convertColorsToNotation();

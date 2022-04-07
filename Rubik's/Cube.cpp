@@ -347,7 +347,7 @@ void Cube::getColor()
 void Cube::getPose()
 {
 	colorToWalls();
-	fixShow();
+	fixWalls();
 
 	std::string c[8];
 	std::string buff = "";
@@ -564,7 +564,7 @@ void Cube::show(bool fix)
 {
 	colorToWalls();
 	if (fix)
-		fixShow();
+		fixWalls();
 	std::cout << "    " << walls[U].substr(0, 3) << std::endl;
 	std::cout << "    " << walls[U].substr(3, 3) << std::endl;
 	std::cout << "    " << walls[U].substr(6, 3) << std::endl;
@@ -577,7 +577,7 @@ void Cube::show(bool fix)
 			  << std::endl;
 }
 
-void Cube::fixShow()
+void Cube::fixWalls()
 {
 	rotateL(walls[F]);
 	rotateL(walls[B]);
@@ -627,7 +627,7 @@ void Cube::readFromFile(const std::string &path)
 			}
 			i++;
 		}
-	file.close();
+		file.close();
 	}
 	else
 	{
