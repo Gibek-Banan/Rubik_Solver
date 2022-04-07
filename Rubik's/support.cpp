@@ -1,18 +1,18 @@
 #include "rubik.hpp"
 
-char		*filetostr(char *filename)
+char *filetostr(char *filename)
 {
-	char	buf[1000];
-	char	*ret;
-	FILE	*ptr;
-	int		i;
+	char buf[1000];
+	char *ret;
+	FILE *ptr;
+	int i;
 
-	ret = (char*)calloc(1000, 1);
+	ret = (char *)calloc(1000, 1);
 	ptr = fopen(filename, "r");
 	i = 0;
 	while (fgets(buf, 999, ptr))
 	{
-		ret = (char*)realloc(ret, strlen(ret) + strlen(buf) + 1);
+		ret = (char *)realloc(ret, strlen(ret) + strlen(buf) + 1);
 		strcpy(ret + i, buf);
 		i += strlen(buf);
 	}
@@ -20,7 +20,7 @@ char		*filetostr(char *filename)
 	return (ret);
 }
 
-void	mult(float *a, float *b, float *p)
+void mult(float *a, float *b, float *p)
 {
 	int i;
 	int j;
