@@ -76,7 +76,9 @@ public:
 	void rotBack(int);
 	void getColor();
 
-	void getPose();
+	void getPosOri();
+	void getPosOri_e();
+	void getPosOri_c();
 	void wallsToColor();
 	void colorToWalls();
 	void show(bool fix = true);

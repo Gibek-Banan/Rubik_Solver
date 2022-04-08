@@ -111,7 +111,7 @@ int main(int ac, char **av)
 
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
-	cube.getPose();
+	cube.getPosOri();
 	cube.show();
 
 	// shuffle(ac, av);
