@@ -1,0 +1,10 @@
+    URO
+    RWY
+    WWY
+RUG RRG OGG WGW
+UGG WRO YUW OOO
+YUY URR UGO RUU
+    OYY
+    YYO
+    GWW
+

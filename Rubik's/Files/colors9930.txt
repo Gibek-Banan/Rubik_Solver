@@ -1,0 +1,10 @@
+    WRO
+    RWY
+    UGW
+OGW RYG ROG UWW
+UGU WRY RUG YOW
+YOY GRY ROO GWY
+    RUU
+    GYU
+    OOU
+

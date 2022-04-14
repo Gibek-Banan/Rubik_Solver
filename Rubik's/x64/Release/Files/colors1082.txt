@@ -1,0 +1,10 @@
+    ORG
+    RWR
+    OUU
+YYW UWR YGR UUW
+GGR WRG OUW YOG
+GOW UYO WOO YOG
+    RUG
+    UYY
+    RWY
+

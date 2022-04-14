@@ -83,7 +83,6 @@ void hashSolve(Cube *solverCube, Solver *s, string *output)
 		}
 		if (*solverCube == c)
 		{
-			solverCube->getColor();
 			solverCube->show();
 			return;
 		}
@@ -93,29 +92,10 @@ void hashSolve(Cube *solverCube, Solver *s, string *output)
 
 int main(int ac, char **av)
 {
-	// cube.show();
-	// stringstream ss;
-	// for (int i = 0; i < 6; i++)
-	// 	for (int j = 0; j < 9; j++)
-	// 	{
-	// 		ss << j;
-	// 		cube.walls[i][j] = const_cast<char *>(ss.str().c_str())[j];
-	// 		cube.wallsToColor();
-	// 	}
-	// cube.show(false);
-
-	// cube.rotCube('R',1);
-	// cube.show();
-	// cube.rotCube('D', 1);
-	// cube.show();
-
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
 	cube.getPosOri();
 	cube.show();
-
-	// shuffle(ac, av);
-	// cube.show();
 	string output;
 	string outputTranslated;
 	Cube solverCube;
@@ -127,8 +107,8 @@ int main(int ac, char **av)
 	cout << outputTranslated << endl;
 	cout << "Total steps: " << output.size() / 2 << endl;
 
-	std::cout << "Write to file" << std::endl;
-	std::fstream file("moves.txt");
+	std::cout << "Write to a file" << std::endl;
+	std::ofstream file("moves.txt");
 	if (file.is_open())
 	{
 		file << outputTranslated;
@@ -139,5 +119,51 @@ int main(int ac, char **av)
 		std::cout << "Can't open a file!" << std::endl;
 	}
 
+	//NUMERATION
+	/* cube.show();
+	 stringstream ss;
+	 for (int i = 0; i < 6; i++)
+	 	for (int j = 0; j < 9; j++)
+	 	{
+	 		ss << j;
+	 		cube.walls[i][j] = const_cast<char *>(ss.str().c_str())[j];
+	 		cube.wallsToColor();
+	 	}
+	 cube.show(false);*/
+	//NUMERATION
+
+	//ROTATE
+	/* cube.rotCube('R',1);
+	 cube.show();
+	 cube.rotCube('D', 1);
+	 cube.show();*/
+	//ROTATE
+
+	//TEST
+	/*std::ofstream file("moves1000.txt");
+	for (int i = 1; i <= 10000;i++)
+	{
+		cube.readFromFile("Files/colors" + std::to_string(i) + ".txt");
+		cube.convertColorsToNotation();
+		cube.getPosOri();
+
+		string outputTranslated;
+		string output;
+		Cube solverCube;
+		solverCube = cube;
+		Solver s(solverCube);
+		hashSolve(&solverCube, &s, &output);
+		if (file.is_open())
+		{
+			file << output.size() / 2<<std::endl;
+		}
+		else
+		{
+			std::cout << "Can't open a file!" << std::endl;
+		}
+		std::cout << "Next"<<std::endl;
+	}
+	file.close();*/
+	//TEST
 	return 0;
 }

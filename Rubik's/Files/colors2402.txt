@@ -1,0 +1,10 @@
+    ORR
+    RWY
+    WGR
+GGU OYG YUW YYG
+OGY ORW RUW WOG
+WGU OOO WUR RRU
+    YUG
+    OYW
+    UUY
+
