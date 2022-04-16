@@ -1,4 +1,6 @@
-﻿#include "Cube.hpp"
+﻿//This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
+#include "Cube.hpp"
 #include "Solver.hpp"
 #include "Rubik.hpp"
 #include <fstream>
@@ -8,11 +10,11 @@
 
 Cube cube;
 
-string translate(string path)
+string translate(const string& path)
 {
 	string ret;
 
-	for (int i = 0; path[i]; i++)
+	for (size_t i = 0; path[i]; i++)
 	{
 		if (path[i] == '1')
 			ret += " ";
@@ -37,7 +39,7 @@ void shuffle(int ac, char **av)
 		exit(1);
 	}
 	if (ac >= 2)
-		for (int i = 0; av[1][i]; i++)
+		for (size_t i = 0; av[1][i]; i++)
 			if (av[1][i] == 'F' || av[1][i] == 'R' || av[1][i] == 'U' ||
 				av[1][i] == 'B' || av[1][i] == 'L' || av[1][i] == 'D')
 			{
@@ -63,7 +65,7 @@ void hashSolve(Cube *solverCube, Solver *s, string *output)
 		while (s->getPhaseId(*solverCube, phase) != s->phaseGoal[phase])
 		{
 			string path = phaseHash[phase - 1][s->getPhaseId(*solverCube, phase)];
-			if (path == "")
+			if (path.empty())
 			{
 				cout << "Solution not found" << endl;
 				exit(1);

@@ -1,3 +1,5 @@
+//This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "Solver.hpp"
 #include <fstream>
 #include <thread>
@@ -20,7 +22,7 @@ void readData(std::string file, int phase)
 		phaseHash[phase - 1][hash] = moves;
 }
 
-Solver::Solver(Cube c)
+Solver::Solver(const Cube& c)
 {
 	Cube tmp;
 
@@ -63,7 +65,7 @@ void Solver::nextPhase()
 	phase++;
 }
 
-int64_t Solver::idPhase1(Cube c)
+int64_t Solver::idPhase1(const Cube& c)
 {
 	int64_t id = 0;
 	for (int i = 0; i < 12; i++)
@@ -74,7 +76,7 @@ int64_t Solver::idPhase1(Cube c)
 	return id;
 }
 
-int64_t Solver::idPhase2(Cube c)
+int64_t Solver::idPhase2(const Cube& c)
 {
 	int64_t id = 0;
 	for (int i = 0; i < 8; i++)
@@ -91,7 +93,7 @@ int64_t Solver::idPhase2(Cube c)
 	return id;
 }
 
-int64_t Solver::idPhase3(Cube c)
+int64_t Solver::idPhase3(const Cube& c)
 {
 	string faces = "FRUBLD";
 
@@ -131,7 +133,7 @@ int64_t Solver::idPhase3(Cube c)
 	return id;
 }
 
-int64_t Solver::idPhase4(Cube c)
+int64_t Solver::idPhase4(const Cube& c)
 {
 	string faces = "FRUBLD";
 
@@ -159,7 +161,7 @@ int64_t Solver::idPhase4(Cube c)
 	return id;
 }
 
-int64_t Solver::getPhaseId(Cube c, int phase)
+int64_t Solver::getPhaseId(const Cube& c, int phase)
 {
 	int64_t id = 0;
 

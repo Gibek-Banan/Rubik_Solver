@@ -64,7 +64,8 @@ public:
 	char color[54];
 	string path;
 	Cube();
-	~Cube();
+	Cube(const Cube& a);
+	~Cube()=default;
 	Cube &operator=(const Cube &a);
 	bool operator==(const Cube &a);
 	void rotCube(char c, int num);

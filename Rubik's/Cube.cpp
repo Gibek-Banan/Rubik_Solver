@@ -1,9 +1,11 @@
+//This is a personal academic project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "Cube.hpp"
 #include <thread>
 
 Cube::Cube()
 {
-	path = "";
+	path.clear();
 	for (char c = 0; c < 6; c++)
 		for (int i = 0; i < 9; i++)
 			color[c * 9 + i] = colorTabEncode[c];
@@ -14,6 +16,22 @@ Cube::Cube()
 	getColor();
 	colorToWalls();
 	// Odczyt -> R -> getPose -> VL -> show -> VL
+}
+
+Cube::Cube(const Cube& a)
+{
+	for (int i = 0; i < 8; i++)
+	{
+		cPos[i] = a.cPos[i];
+		cOri[i] = a.cOri[i];
+	}
+	for (int i = 0; i < 12; i++)
+	{
+		ePos[i] = a.ePos[i];
+		eOri[i] = a.eOri[i];
+	}
+	path = a.path;
+	getColor();
 }
 
 Cube &Cube::operator=(const Cube &a)
@@ -29,6 +47,7 @@ Cube &Cube::operator=(const Cube &a)
 		eOri[i] = a.eOri[i];
 	}
 	path = a.path;
+	getColor();
 	return *this;
 }
 
@@ -41,10 +60,6 @@ bool Cube::operator==(const Cube &a)
 		if (ePos[i] != a.ePos[i] || eOri[i] != a.eOri[i])
 			return 0;
 	return 1;
-}
-
-Cube::~Cube()
-{
 }
 
 void Cube::rotCube(char c, int amount)
@@ -365,55 +380,55 @@ void Cube::getPosOri_e()
 
 	temp += walls[U][7];
 	temp += walls[F][1];
-	e[uf] = temp;
-	temp = "";
+	e[uf] = std::move(temp);
+	
 	temp += walls[U][5];
 	temp += walls[R][1];
-	e[ur] = temp;
-	temp = "";
+	e[ur] = std::move(temp);
+	
 	temp += walls[U][1];
 	temp += walls[B][1];
-	e[ub] = temp;
-	temp = "";
+	e[ub] = std::move(temp);
+	
 
 	temp += walls[U][3];
 	temp += walls[L][1];
-	e[ul] = temp;
-	temp = "";
+	e[ul] = std::move(temp);
+	
 	temp += walls[D][1];
 	temp += walls[F][7];
-	e[df] = temp;
-	temp = "";
+	e[df] = std::move(temp);
+	
 	temp += walls[D][5];
 	temp += walls[R][7];
-	e[dr] = temp;
-	temp = "";
+	e[dr] = std::move(temp);
+	
 
 	temp += walls[D][7];
 	temp += walls[B][7];
-	e[db] = temp;
-	temp = "";
+	e[db] = std::move(temp);
+	
 	temp += walls[D][3];
 	temp += walls[L][7];
-	e[dl] = temp;
-	temp = "";
+	e[dl] = std::move(temp);
+	
 	temp += walls[F][5];
 	temp += walls[R][3];
-	e[fr] = temp;
-	temp = "";
+	e[fr] = std::move(temp);
+	
 
 	temp += walls[B][5];
 	temp += walls[R][5];
-	e[br] = temp;
-	temp = "";
+	e[br] = std::move(temp);
+	
 	temp += walls[B][3];
 	temp += walls[L][3];
-	e[bl] = temp;
-	temp = "";
+	e[bl] = std::move(temp);
+	
 	temp += walls[F][3];
 	temp += walls[L][5];
-	e[fl] = temp;
-	temp = "";
+	e[fl] = std::move(temp);
+	
 
 	for (int i = 0; i < 12; i++)
 	{
@@ -460,50 +475,50 @@ void Cube::getPosOri_c()
 	temp += walls[U][8];
 	temp += walls[R][0];
 	temp += walls[F][2];
-	c[urf] = temp;
-	temp = "";
+	c[urf] = std::move(temp);
+	
 
 	temp += walls[U][6];
 	temp += walls[F][0];
 	temp += walls[L][2];
-	c[ufl] = temp;
-	temp = "";
+	c[ufl] = std::move(temp);
+	
 
 	temp += walls[D][2];
 	temp += walls[F][8];
 	temp += walls[R][6];
-	c[dfr] = temp;
-	temp = "";
+	c[dfr] = std::move(temp);
+	
 
 	temp += walls[D][0];
 	temp += walls[L][8];
 	temp += walls[F][6];
-	c[dlf] = temp;
-	temp = "";
+	c[dlf] = std::move(temp);
+	
 
 	temp += walls[U][2];
 	temp += walls[B][2];
 	temp += walls[R][2];
-	c[ubr] = temp;
-	temp = "";
+	c[ubr] = std::move(temp);
+	
 
 	temp += walls[U][0];
 	temp += walls[L][0];
 	temp += walls[B][0];
-	c[ulb] = temp;
-	temp = "";
+	c[ulb] = std::move(temp);
+	
 
 	temp += walls[D][8];
 	temp += walls[R][8];
 	temp += walls[B][8];
-	c[drb] = temp;
-	temp = "";
+	c[drb] = std::move(temp);
+	
 
 	temp += walls[D][6];
 	temp += walls[B][6];
 	temp += walls[L][6];
-	c[dbl] = temp;
-	temp = "";
+	c[dbl] = std::move(temp);
+	
 
 	for (int i = 0; i < 8; i++)
 	{
@@ -545,7 +560,7 @@ void Cube::getPosOri_c()
 void Cube::offset(std::string &s)
 {
 	std::string temp = s;
-	for (int i = 0; i < s.length(); i++)
+	for (size_t i = 0; i < s.length(); i++)
 	{
 		s[(i + 1) % s.length()] = temp[i];
 	}
@@ -609,17 +624,17 @@ void Cube::fixRead()
 	rotateR(walls[L]);
 }
 
-void Cube::readFromFile(const std::string &path)
+void Cube::readFromFile(const std::string &str)
 {
 	std::string line;
-	ifstream file(path);
+	ifstream file(str);
 	if (file.is_open())
 	{
 		int i = 0;
 		while (std::getline(file, line))
 		{
 			std::istringstream linestream(line);
-			if (i >= 0 && i <= 2)
+			if (i <= 2)
 			{
 				while (linestream >> walls[U][i * 3] >> walls[U][i * 3 + 1] >> walls[U][i * 3 + 2])
 				{
