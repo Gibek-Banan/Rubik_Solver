@@ -1,2 +1,3 @@
 C:\dev\VS_C++\repos\Rubik's\Rubik's\x64\Release\Rubik's.exe
 C:\dev\VS_C++\repos\Rubik_Solver\Rubik's\x64\Release\Rubik's.exe
+C:\dev\VS_C++\Rubik_Solver\Rubik's\x64\Release\Rubik's.exe

@@ -2,6 +2,7 @@
 // PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 #include "Cube.hpp"
 #include <thread>
+#include <future>
 
 Cube::Cube()
 {
@@ -364,10 +365,10 @@ void Cube::getPosOri()
 {
 	colorToWalls();
 	fixWalls();
-	thread t1(&Cube::getPosOri_c,this);
-	thread t2(&Cube::getPosOri_e,this);
-	t1.join();
-	t2.join();
+	auto f1 = std::async(&Cube::getPosOri_c,this);
+	auto f2 = std::async(&Cube::getPosOri_e,this);
+	f1.wait();
+	f2.wait();
 }
 
 void Cube::getPosOri_e()

@@ -1,6 +1,7 @@
-﻿  main.cpp
+﻿  Cube.cpp
   Generating code
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 681 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  733 of 1370 functions (53.5%) were compiled, the rest were copied from previous compilation.
+    69 functions were new in current compilation
+    39 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Rubik's.vcxproj -> C:\dev\VS_C++\repos\Rubik_Solver\Rubik's\x64\Release\Rubik's.exe
+  Rubik's.vcxproj -> C:\dev\VS_C++\Rubik_Solver\Rubik's\x64\Release\Rubik's.exe

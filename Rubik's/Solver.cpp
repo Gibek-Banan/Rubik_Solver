@@ -3,6 +3,7 @@
 #include "Solver.hpp"
 #include <fstream>
 #include <thread>
+#include <future>
 
 map<int64_t, string> phaseHash[4];
 char moves[6] = {'F', 'R', 'U', 'B', 'L', 'D'};
@@ -30,14 +31,14 @@ Solver::Solver(const Cube& c)
 		allowedMoves[i] = 1;
 	for (int i = 1; i <= 4; i++)
 		phaseGoal[i] = getPhaseId(tmp, i);
-	thread th1(readData, "phase1", 1);
-	thread th2(readData, "phase2", 2);
-	thread th3(readData, "phase3", 3);
-	thread th4(readData, "phase4", 4);
-	th1.join();
-	th2.join();
-	th3.join();
-	th4.join();
+	auto f1 = std::async(readData, "phase1", 1);
+	auto f2 = std::async(readData, "phase2", 2);
+	auto f3 = std::async(readData, "phase3", 3);
+	auto f4 = std::async(readData, "phase4", 4);
+	f1.wait();
+	f2.wait();
+	f3.wait();
+	f4.wait();
 }
 
 void Solver::nextPhase()
