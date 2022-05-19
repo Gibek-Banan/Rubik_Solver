@@ -731,3 +731,8 @@ void Cube::rotateL(std::string &wall)
 	wall[6] = temp0;
 	wall[3] = temp1;
 }
+
+void Cube::animation()
+{
+
+}

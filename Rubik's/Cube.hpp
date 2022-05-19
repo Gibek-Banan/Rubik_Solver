@@ -90,6 +90,7 @@ public:
 	void rotateR(std::string &wall);
 	void rotateL(std::string &wall);
 	void offset(std::string &s);
+	void animation();
 };
 
 #endif
