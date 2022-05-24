@@ -116,19 +116,19 @@ int main(int ac, char** av)
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
 	cube.getPosOri();
-	//cube.show();
+	cube.show();
 	string output;
 	string outputTranslated;
 	Cube solverCube;
 	solverCube = cube;
 	Solver s(solverCube);
 	hashSolve(&solverCube, &s, &output);
-	//cout << "Final output:" << endl;
+	cout << "Final output:" << endl;
 	outputTranslated = translate(output);
-	//cout << outputTranslated << endl;
-	//cout << "Total steps: " << output.size() / 2 << endl;
+	cout << outputTranslated << endl;
+	cout << "Total steps: " << output.size() / 2 << endl;
 
-	//std::cout << "Write to a file" << std::endl;
+	std::cout << "Write to a file" << std::endl;
 	std::ofstream file("moves.txt");
 	if (file.is_open())
 	{
@@ -141,6 +141,10 @@ int main(int ac, char** av)
 	}
 
 	//ANIMATION:
+	std::cout << "\n-------------------------------------------------\n";
+	std::cout << "CLICK ENTER TO START ANIMATION\n";
+	std::cout << "\-------------------------------------------------\n";
+	std::cin.get();
 	cube.readFromFile("colors.txt");
 	cube.convertColorsToNotation();
 	cube.getPosOri();
