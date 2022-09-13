@@ -1,1 +1,9 @@
-﻿  Rubik's.vcxproj -> C:\dev\VS_C++\Rubik_Solver\Rubik's\x64\Release\Rubik's.exe
+﻿  Cube.cpp
+  Solver.cpp
+  main.cpp
+  Generating code
+  6 of 1592 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    38 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  Rubik's.vcxproj -> C:\dev\VS_C++\Rubik_Solver\Rubik's\x64\Release\Rubik's.exe
